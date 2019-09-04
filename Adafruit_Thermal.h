@@ -24,7 +24,7 @@
 // *** EDIT THIS NUMBER ***  Printer firmware version is shown on test
 // page (hold feed button when connecting power).  Number used here is
 // integerized, e.g. 268 = 2.68 firmware.
-#define PRINTER_FIRMWARE 268
+#define PRINTER_FIRMWARE 269
 
 #include "Arduino.h"
 
@@ -171,6 +171,7 @@ class Adafruit_Thermal : public Print {
     setMaxChunkHeight(int val=256),
     setSize(char value),
     setTimes(unsigned long, unsigned long),
+    setFont(char value),
     sleep(),
     sleepAfter(uint16_t seconds),
     strikeOff(),
@@ -187,6 +188,10 @@ class Adafruit_Thermal : public Print {
     wake();
   bool
     hasPaper();
+  uint8_t
+    getMaxColumn(),
+    getCharHeight(),
+    getCharWidth();
 
  private:
 
@@ -198,6 +203,7 @@ class Adafruit_Thermal : public Print {
     column,        // Last horizontal column printed
     maxColumn,     // Page width (output 'wraps' at this point)
     charHeight,    // Height of characters, in 'dots'
+    charWidth,
     lineSpacing,   // Inter-line spacing (not line height), in dots
     barcodeHeight, // Barcode height in dots, not including text
     maxChunkHeight,
@@ -215,6 +221,7 @@ class Adafruit_Thermal : public Print {
     writeBytes(uint8_t a, uint8_t b, uint8_t c, uint8_t d),
     setPrintMode(uint8_t mask),
     unsetPrintMode(uint8_t mask),
+    adjustCharValues(uint8_t mask),
     writePrintMode();
 
 };
